@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ReceiveDataPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Recibir Datos</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding style="margin: 0%; border: 0%; padding: 0%; width: 100%; height: 100%" class="no-scroll">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="container" style="margin: 1%; border: 0%; padding: 0%; width: 100%; height: 10%">
+    <button ion-button full outline (click)="paste()" *ngIf="dataReceived == '' && cleanStatus == false">Pegar</button>
+    <button ion-button full outline (click)="presentConfirmInsertData()" *ngIf="dataReceived != '' && cleanStatus == false">Procesar Información</button>
+    <button ion-button full outline (click)="doRefresh()" *ngIf="cleanStatus == true">Limpiar</button>
+  </div>
+  <!-- <div class="container" style="margin: 0%; border: 0%; padding: 0%; width: 100%; height: 100%">
+    <div class="container" style="margin: 0%; border: 0%; padding: 0%; width: 100%; height: 80%">
+      <ion-item style="margin: 0%; border: 0%; padding: 0%; width: 100%; height: 100%">
+        <ion-textarea placeholder="Ingrese los datos recibidos" *ngIf="dataReceived != ''" [(ngModel)]="dataReceived" disabled="true"></ion-textarea>
+      </ion-item>
+    </div>
+  </div> -->
+  <ion-card *ngIf="datas">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card-header style="color: black; font-size: 20px; margin: 0%; padding: 0%; border: 0%">
+            Cierre #{{datas[0].closure}}
+          </ion-card-header>
+          <ion-card-content style="color: black; font-size: 18px; margin: 0%; padding: 0%; border: 0%">
+            Vendedor: {{datas[0].seller}}
+          </ion-card-content>
+          <ion-card-content style="color: #488aff; font-size: 18px; margin: 0%; padding: 0%; border: 0%">
+            Total Vendido: {{datas[0].total | currency:'Lps.':true:'1.2-2'}}
+          </ion-card-content>
+        </ion-col>
+        <ion-col>
+          <ion-card-header style="color: black; font-size: 13px; margin: 0%; padding: 0%; border: 0%; text-align: right;">
+            Fecha: {{date | date: 'dd/MM/yyyy hh:mm'}}
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

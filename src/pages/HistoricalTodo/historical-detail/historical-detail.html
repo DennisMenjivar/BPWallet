@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentConfirmViaSendData()">
+        <ion-icon class="share-icon" name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tickets Cierre #{{miClosure.id}}</ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="option">
+    <ion-segment-button value="Tickets">
+      Tickets
+    </ion-segment-button>
+    <ion-segment-button value="Historical">
+      Consolidado
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div [ngSwitch]="option">
+    <div *ngSwitchCase="'Tickets'">
+      <ion-card (click)="ticketSelected(diaria)" *ngFor="let diaria of diariaControl; let i = index;">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card-header style="color: black; font-size: 20px; margin: 0%; padding: 0%; border: 0%">
+                Ticket # {{diaria.id}}
+              </ion-card-header>
+              <ion-card-content style="color: black; font-size: 18px; margin: 0%; padding: 0%; border: 0%">
+                Cliente: {{diaria.client}}
+              </ion-card-content>
+            </ion-col>
+            <ion-col>
+              <ion-card-header style="color: black; font-size: 15px; margin: 0%; padding: 0%; border: 0%; text-align: right;">
+                {{diaria.date | date: 'dd/MM/yyyy hh:mm'}}
+              </ion-card-header>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-content style="color: #488aff; font-size: 18px; margin: 0%; padding: 0%; border: 0%">
+                Total: {{diaria.total | currency:'Lps.':true:'1.2-2'}}
+              </ion-card-content>
+            </ion-col>
+            <ion-col>
+              <ion-buttons end>
+                <button ion-button icon-only color="tomato" clear *ngIf="diaria.win == 1">
+                  <ion-icon class="share-icon" name="star"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'Historical'">
+      <div class="container" style="margin: 0%; border: 0%; padding: 0%; width: 100%; height: 55%">
+        <div class="row">
+          <ion-card (click)="editClosure()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-card-header style="color: black; font-size: 19px; margin: 0%; padding: 0%; border: 0%">
+                    Cierre # {{miClosure.id}} {{miClosure.description}}
+                  </ion-card-header>
+                </ion-col>
+                <ion-col>
+                  <ion-card-header style="color: black; font-size: 13px; margin: 0%; padding: 0%; border: 0%; text-align: right;">
+                    {{miClosure.date | date: 'dd/MM/yyyy hh:mm'}}
+                  </ion-card-header>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-card-content style="color: #488aff; font-size: 18px; margin: 0%; padding: 0%; border: 0%; width: 100%">
+                    Total Vendido: {{getTotal() | currency:'Lps.':true:'1.2-2'}}
+                  </ion-card-content>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-card-content style="color: tomato; font-size: 18px; margin: 0%; padding: 0%; border: 0%; width: 100%">
+                    Total ganado: {{miClosure.totalWinning | currency:'Lps.':true:'1.2-2'}}
+                    <ion-card-content *ngIf="miClosure.winningNumber != -1" style="color: tomato; font-size: 18px; margin: 0%; padding: 0%; border: 0%; width: 100%; text-align: right;">
+                      NG: {{miClosure.winningNumber | number:'2.0-0'}}
+                    </ion-card-content>
+                  </ion-card-content>
+                </ion-col>
+                <!-- <ion-col *ngIf="closure.winningNumber != 0">
+                  <ion-card-content style="color: tomato; font-size: 18px; margin: 0%; padding: 0%; border: 0%; width: 100%; text-align: right;">
+                    NG: {{closure.winningNumber | number:'2.0-0'}}
+                  </ion-card-content>
+                </ion-col> -->
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </div>
+        <div class="row">
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngFor="let b of consolidated">
+                <button large ion-button style="background-color: aquamarine;width: 100%; margin: 0%; padding: 0%; border: 0%;height: 100%; color: black">{{b.number | number:'2.0-0'}}|{{b.lempiras}}</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <!-- <div class="row">
+          <button ion-button full outline disabled color="dark">Total: {{database.totalTotalConsolidated | currency:'Lps.':true:'1.2-2'}}</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

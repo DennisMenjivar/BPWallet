@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CreateUser</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="validateUser(user.username, user.name, user.password, user.kind, whosaler, telephoneNumber)">
+    <ion-item>
+      <ion-label>Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="user.username" name="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="user.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="text" [(ngModel)]="user.password" name="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tipo</ion-label>
+      <ion-input type="tel" [(ngModel)]="user.kind" name="kind"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mayorista</ion-label>
+      <ion-input type="text" [(ngModel)]="whosaler" name="whosaler"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Número Teléfonico</ion-label>
+      <ion-input type="tel" [(ngModel)]="telephoneNumber" name="telephoneNumber"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Crear Usuario</button>
+  </form>
+</ion-content>

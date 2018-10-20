@@ -1,0 +1,6 @@
+<ion-list>
+  <ion-list-header>Números</ion-list-header>
+  <ion-item *ngFor="let item of items">
+    {{item.number | number : '2.0-0'}}|{{item.lempiras}}
+  </ion-item>
+</ion-list>

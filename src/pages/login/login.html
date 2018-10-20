@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="no-scroll">
+  <form>
+    <ion-list>
+      <ion-item text-center>
+        <ion-img width="192" height="192" src="assets/imgs/Panda.png" style="background-color: transparent"></ion-img>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person" item-left></ion-icon>
+        <ion-label stacked>Usuario:</ion-label>
+        <ion-input name="username" type="text" placeholder="Usuario" [(ngModel)]="user.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="key" item-left></ion-icon>
+        <ion-label stacked>Contraseña:</ion-label>
+        <ion-input name="password" type="password" placeholder="Contraseña" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block (click)="validate(user.username, user.password)">Ingresar</button>
+    </div>
+  </form>
+  <div text-center>
+    <!-- <a ion-button block clear (click)="goToSignup()">
+      Nueva cuenta
+    </a>
+    <a ion-button block clear (click)="goToResetPassword()">
+      Olvide password
+    </a> -->
+  </div>
+</ion-content>

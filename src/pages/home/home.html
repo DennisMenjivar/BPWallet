@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>BPWallet</ion-title>
+    <ion-buttons end *ngIf="option == 'Lempiras' || _auxiliarService.diariaDetalle.length > 0">
+      <button ion-button icon-only (click)="checkOut()">
+        <!-- (click)="createNewClient()" -->
+        {{_auxiliarService.diariaDetalle.length}}
+        <ion-icon name="cash"></ion-icon>
+      </button>
+      <!-- <button ion-button icon-only (click)="action2()">
+        <ion-icon name="trash"></ion-icon>
+      </button> -->
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style="padding: 0%; margin: 0%; border: 0%;  width: 100%; height: 100%;" class="no-scroll">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <h3 style="text-align: left; color: #488aff; vertical-align: bottom; padding: 0%; margin: 0%; border: 0%">{{_auxiliarService.totalTicket | currency:'Lps.':true:'1.2-2'}}</h3>
+  <div class="container" style="height: 30%; padding: 0%; margin: 0%; border: 0%">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3 style="vertical-align: text-bottom; text-align: center; color: rgb(160, 160, 160); padding: 0%; margin: 0%; border: 0%; width: 100%; text-decoration: underline;"
+            *ngIf="this.option == 'Lempiras'"> {{numberSelected.number | number : '2.0-0'}} </h3>
+          <h1 style="vertical-align: text-top; width: 100%; text-align: center;color: black; padding: 0%; margin: 0%; border: 0%" *ngIf="this.option == 'Número'">{{principalText | number : '2.0-0'}}</h1>
+          <h1 style="vertical-align: text-top; width: 100%; text-align: center;color: black; padding: 0%; margin: 0%; border: 0%" *ngIf="this.option == 'Lempiras'">{{principalText | number : '1.0-0'}}</h1>
+          <h5 *ngIf="option=='Número'" style="text-align: center;color: black; width: 100%; padding: 0%; margin: 0%; border: 0%">{{option}}</h5>
+          <h5 *ngIf="option=='Lempiras'" style="text-align: center;color: black; width: 100%; color: #488aff; ; padding: 0%; margin: 0%; border: 0%">{{option}}</h5>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h5 *ngIf="option == 'Número'" style="text-align: right;color: black">{{option}}</h5>
+      </ion-col>
+      <ion-col>
+        <h5 *ngIf="option == 'Lempiras'" style="text-align: left;color: #488aff ">{{option}}</h5>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <!-- <h5 style="text-align: center;color: black">{{option}}</h5> -->
+  <div class="container" style="margin: 0%; border: 0%; padding: 0%; width: 100%; height: 55%">
+    <div class="row" style="width: 100%; height: 100%">
+      <div class="col-4" *ngFor="let b of principalButtons" style="width: 33.33%; margin: 0%; padding: 0%; border: 0%">
+        <button (click)="click(b)" ion-button color="white" style="width: 100%; margin: 0%; padding: 0%; border: 0%;height: 100%; color: black">{{b.name}}</button>
+      </div>
+    </div>
+  </div>
+  <!-- <button (click)="gotoSendData()" large ion-button style="width: 100%; margin: 0%; padding: 0%; border: 0%;height: 100%; background-color: transparent; color: tomato">Send Data</button> -->
+</ion-content>
